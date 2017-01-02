@@ -65,7 +65,7 @@ A static webapp that always displays the same content may not be what your users
 
 There are no hard and fast rules with this architecture, but there are a few gotchas you should be aware of.
 
-* Requests for application content may be delayed by various processes such loading of the app shell, loading of JavaScript or fetch requests. Jake Archibald hacked around this by initiating the data request in his Wikipedia offline web app as he [served the shell](https://github.com/jakearchibald/offline-wikipedia/blob/master/public/js/sw/index.js#L59).
+* Requests for application content may be delayed by various processes such as the loading of the app shell, loading of JavaScript or fetch requests. Jake Archibald hacked around this by initiating the data request in his Wikipedia offline web app as he [served the shell](https://github.com/jakearchibald/offline-wikipedia/blob/master/public/js/sw/index.js#L59).
 
 * In the application shell architecture, downloading and adding content can interfere with progressive rendering. This can be an issue for larger JavaScript bundles or longer pieces of content on slow connections. It might even cause performance issues when reading content from the disk. Where possible *include* meaningful page content with the initial download rather than making a separate request for it. In the Wikipedia application, Jake was loading third party content and had to work around this, which is why he used the [Streams API](https://github.com/jakearchibald/offline-wikipedia/blob/master/public/js/page/views/article.js#L86). We strongly recommend reducing the number of requests made for your page content if at all possible.
 
